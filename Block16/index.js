@@ -40,15 +40,16 @@ function refillTotal (price, refills){
 }
 
 function subscriptionDiscount (sub, price) {
-    if (sub == true){
-        return price * (1-.25)
-    } else return price
+    if (sub == true){ 
+        return price * (1-.25) // <--- Since 1 - .25  will alway evaluate to .75 you can just use the .75 in this equation
+    } else //<-- you do not actually need this else key word becuase the if block has a return.
+    return price
 }
 //Task 2 - If the customer has a coupon, the customer will receive a $10 discount after the subscription discount has been calculated.
 
 function applyCoupon (patient) {
       patient.grandTotal = refillTotal(patient.pricePerRefill,patient.refills)
-    if (patient.coupon == true) {
+    if (patient.coupon == true) { //<-- so both this line and line 43 do not need to be compared to the boolean true becuase the value assigned to the key itself is a boolean
         return subscriptionDiscount (patient.subscription,patient.grandTotal) - 10
     } return subscriptionDiscount (patient.subscription,patient.grandTotal)
 }
@@ -71,6 +72,6 @@ let patient = [timmy,sarah,rocky];
 
 for (let i = 0; i <= patient.length-1; i++) {
     patient[i].grandTotal = applyCoupon(patient[i])
-    console.log((patient[i].patientName) + " => \"Your grand total is $" + (patient[i].grandTotal)+"\"")
+    console.log((patient[i].patientName) + " => \"Your grand total is $" + (patient[i].grandTotal)+"\"") //<-- you can use single quotes or backticks to avoid having to use the escape char in these strings.
 }
 
